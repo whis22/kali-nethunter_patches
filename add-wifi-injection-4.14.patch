@@ -36,17 +36,19 @@
  	if (unlikely(ieee80211_is_ctl(hdr->frame_control)))
  		return TX_CONTINUE;
 
-@@ -1998,7 +1998,9 @@ 			ieee80211_mps_set_frame_flags(sdata, NULL, hdr);
+--- a/tx.c
++++ b/tx.c
+@@ -1998,7 +1998,8 @@ 			ieee80211_mps_set_frame_flags(sdata, NULL, hdr);
  		}
  	}
 -
 -	ieee80211_set_qos_hdr(sdata, skb);
-+	
 +	if (likely(info->control.vif->type != NL80211_IFTYPE_MONITOR)) {
 +		ieee80211_set_qos_hdr(sdata, skb);
 +	}
  	ieee80211_tx(sdata, sta, skb, false, txdata_flags);
  }
+
 
 --- a/net/wireless/chan.c
 +++ b/net/wireless/chan.c
