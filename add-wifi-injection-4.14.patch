@@ -36,8 +36,6 @@
  	if (unlikely(ieee80211_is_ctl(hdr->frame_control)))
  		return TX_CONTINUE;
 
---- a/tx.c
-+++ b/tx.c
 @@ -1998,7 +1998,8 @@ 			ieee80211_mps_set_frame_flags(sdata, NULL, hdr);
  		}
  	}
